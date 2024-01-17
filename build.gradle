@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.codex'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // 시큐리티
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // 타임리프
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.4.1'
+
+    // 롬복
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    //Log4jdbc
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16' // 최신 버전으로 대체
+
+    // DB
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'mysql:mysql-connector-java'
+
+    // 엑셀 poi
+    implementation 'org.apache.poi:poi:5.2.2'                // .xls 확장자
+    implementation 'org.apache.poi:poi-ooxml:5.2.2'          // .xlsx 확장자
+
+    // file
+    implementation 'commons-io:commons-io:2.11.0'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.codex.kosiea.dao.UserDAO">
+
+	<select id="userChk" parameterType="map" resultType="map">
+		SELECT *
+		  FROM MEMBERS
+		 WHERE NAME = #{username}
+		   AND TEL = ${tel}
+		   AND PASSWORD = #{userPw};
+	</select>
+
+    <!-- 로그인한 사용자 정보 -->
+	<select id="findByUserID" resultType="User" parameterType="string">
+		SELECT *
+		  FROM MEMBERS
+		 WHERE NAME = #{username}
+	</select>
+
+<!--	&lt;!&ndash;-->
+<!--	사용자 아이디 중복 검사-->
+<!--	0 : 사용가능-->
+<!--	1 : 사용 불가능-->
+<!--	&ndash;&gt;-->
+<!--	<select id="getUserIdYn" parameterType="hashMap" resultType="int">-->
+<!--		SELECT COUNT(*) AS USER_ID_YN-->
+<!--		  FROM hospital_m-->
+<!--		 WHERE H_ID = #{h_id}-->
+<!--	</select>-->
+
+<!--	&lt;!&ndash; 병원 계정 등록 &ndash;&gt;-->
+<!--	<insert id="insertUser" parameterType="map">-->
+<!--		INSERT INTO hospital_m(H_ID, EMAIL, H_PW, H_NAME, H_LOCATION, H_MANAGER, H_PHONE, H_TEL, H_FAX, ROLE_CD, ROLE_NM, CREATE_DATE, UPDATE_DATE)-->
+<!--		VALUES-->
+<!--			( #{h_id}-->
+<!--			, #{email}-->
+<!--			, #{h_pw}-->
+<!--			, #{h_name}-->
+<!--			, #{h_location}-->
+<!--			, #{h_manager}-->
+<!--			, #{h_phone}-->
+<!--			, #{h_tel}-->
+<!--			, #{h_fax}-->
+<!--			, '1'-->
+<!--			, '관리자'-->
+<!--			, CURRENT_TIMESTAMP-->
+<!--			, CURRENT_TIMESTAMP-->
+<!--			);-->
+<!--	</insert>-->
+
+<!--	<insert id="insertExcelUser" parameterType="map" keyProperty="idx">-->
+<!--		<selectKey order="BEFORE" keyProperty="idx" resultType="int">-->
+<!--        SELECT MAX(IDX)+1 AS idx FROM hospital_m-->
+<!--		</selectKey>-->
+<!--		INSERT INTO hospital_m(IDX, H_ID, EMAIL, H_PW, H_NAME, H_LOCATION, H_MANAGER, H_PHONE, H_TEL, H_FAX, ROLE_CD, ROLE_NM, CREATE_DATE, UPDATE_DATE)-->
+<!--		VALUES-->
+<!--			( #{idx}-->
+<!--		    , #{h_id}-->
+<!--			, #{email}-->
+<!--			, #{h_pw}-->
+<!--			, #{h_name}-->
+<!--			, #{h_location}-->
+<!--			, #{h_manager}-->
+<!--			, #{h_phone}-->
+<!--			, #{h_tel}-->
+<!--			, #{h_fax}-->
+<!--			, '1'-->
+<!--			, '관리자'-->
+<!--			, CURRENT_TIMESTAMP-->
+<!--			, CURRENT_TIMESTAMP-->
+<!--			);-->
+<!--	</insert>-->
+
+<!--	<update id="updateUser" parameterType="map">-->
+<!--		UPDATE hospital_m-->
+<!--           SET EMAIL = #{email}-->
+<!--		<if test="h_pw != null and h_pw != ''">-->
+<!--             , H_PW = #{h_pw}-->
+<!--		</if>-->
+<!--             , H_NAME = #{h_name}-->
+<!--             , H_LOCATION = #{h_location}-->
+<!--             , H_MANAGER = #{h_manager}-->
+<!--             , H_PHONE = #{h_phone}-->
+<!--             , H_TEL = #{h_tel}-->
+<!--             , H_FAX = #{h_fax}-->
+<!--             , UPDATE_DATE = CURRENT_TIMESTAMP-->
+<!--         WHERE h_id = #{h_id}-->
+<!--	</update>-->
+
+<!--	&lt;!&ndash; 병원 리스트 조회 &ndash;&gt;-->
+<!--	<select id="getHospitalList" parameterType="hashMap" resultType="map">-->
+<!--		SELECT IDX-->
+<!--		     , H_ID-->
+<!--		     , EMAIL-->
+<!--		     , H_NAME-->
+<!--		     , H_LOCATION-->
+<!--		     , H_MANAGER-->
+<!--		     , H_PHONE-->
+<!--		     , H_TEL-->
+<!--		     , H_FAX-->
+<!--		  FROM hospital_m-->
+<!--		<where>-->
+<!--			<if test="search != null and search != ''">-->
+<!--				AND ( H_ID LIKE CONCAT('%', #{search}, '%')-->
+<!--			 	 OR H_MANAGER LIKE CONCAT('%', #{search}, '%')-->
+<!--				 OR H_NAME LIKE CONCAT('%', #{search}, '%')-->
+<!--				)-->
+<!--			</if>-->
+<!--		</where>-->
+<!--		 ORDER BY IDX DESC-->
+<!--		 LIMIT #{startIndex}, #{pageSize}-->
+<!--	</select>-->
+
+<!--	&lt;!&ndash; 병원 리스트 카운트 조회 &ndash;&gt;-->
+<!--	<select id="getHospitalListCnt" parameterType="hashMap" resultType="int">-->
+<!--		SELECT COUNT(*) AS cnt-->
+<!--		FROM hospital_m-->
+<!--		<where>-->
+<!--			<if test="search != null and search != ''">-->
+<!--				AND ( H_ID LIKE CONCAT('%', #{search}, '%')-->
+<!--				OR H_MANAGER LIKE CONCAT('%', #{search}, '%')-->
+<!--				OR H_NAME LIKE CONCAT('%', #{search}, '%')-->
+<!--				)-->
+<!--			</if>-->
+<!--		</where>-->
+<!--	</select>-->
+
+<!--	<delete id="deleteHospitalList" parameterType="map">-->
+<!--		DELETE FROM hospital_m WHERE H_ID = #{h_id}-->
+<!--	</delete>-->
+
+<!--	<select id="selectUserInfo" parameterType="map" resultType="map">-->
+<!--		SELECT H_ID-->
+<!--			 , EMAIL-->
+<!--			 , H_NAME-->
+<!--			 , H_LOCATION-->
+<!--			 , H_MANAGER-->
+<!--			 , H_PHONE-->
+<!--			 , H_TEL-->
+<!--			 , H_FAX-->
+<!--			 , CREATE_DATE-->
+<!--			 , UPDATE_DATE-->
+<!--			 , ROLE_CD-->
+<!--			 , ROLE_NM-->
+<!--		  FROM hospital_m-->
+<!--		 WHERE H_ID = #{h_id}-->
+<!--	</select>-->
+
+<!--	<select id="selectUserInfoDto" parameterType="User" resultType="User">-->
+<!--		SELECT H_ID-->
+<!--			 , EMAIL-->
+<!--			 , H_NAME-->
+<!--			 , H_LOCATION-->
+<!--			 , H_MANAGER-->
+<!--			 , H_PHONE-->
+<!--			 , H_TEL-->
+<!--			 , H_FAX-->
+<!--			 , CREATE_DATE-->
+<!--			 , UPDATE_DATE-->
+<!--			 , ROLE_CD-->
+<!--			 , ROLE_NM-->
+<!--		FROM hospital_m-->
+<!--		WHERE H_ID = #{H_ID}-->
+<!--	</select>-->
+
+<!--	<select id="selectUserId" resultType="String">-->
+<!--		SELECT H_ID-->
+<!--		  FROM hospital_m-->
+<!--	</select>-->
+
+</mapper>

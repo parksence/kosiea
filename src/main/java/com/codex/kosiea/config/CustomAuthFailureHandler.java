@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHandler {
@@ -22,32 +23,35 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 
-//		// 로그인할 때 아이디, 비밀번호 값 담기
-//		HashMap<String, Object> loginInfo = new HashMap();
-//		loginInfo.put("user_id", request.getParameter("username"));
-//		loginInfo.put("user_pw", request.getParameter("password"));
-//
-//		// 아이디 존재 여부 체크하여 있으면 : 1 없으면 : 0
-//		int userIdCheckYn = userService.idFailYnCheck(loginInfo);
-//		int userStatus; // 로그인 실패 상태 값
-//
-//		if(userIdCheckYn == 1) {
-//
-//			// 0 : 성공, 2 : 비밀번호 틀림, 3 : 승인 대기,  4 : 승인 거절
-//			userStatus = userService.getUserStatus(loginInfo);
-//
-//		} else {
-//			userStatus = 1; // 아이디 없음
-//		}
+		String username = request.getParameter("username");
+		String tel = request.getParameter("tel");
+		String password = request.getParameter("password");
 
-//		loginInfo.put("login_yn", userStatus);
-//		loginInfo.put("action_comment", "로그인 실패");
-//
-//		// 로그인 이력 추가
-//		logService.insertLoginLog(loginInfo, request);
+		// 로그인할 때 아이디, 비밀번호 값 담기
+		Map<String, Object> loginInfo = new HashMap();
+		loginInfo.put("name", username);
+		loginInfo.put("tel", tel);
+		loginInfo.put("password", password);
 
-//		setDefaultFailureUrl("/login?error=true&exception=" + userStatus);
-		setDefaultFailureUrl("/login?error=true&exception=");
+		// 아이디 존재 여부 체크하여 있으면 : 1 없으면 : 0
+		int userYn = userService.idFailYnCheck(loginInfo);
+		if(userYn > 0) {
+			// 암호화 비밀번호 체크
+			boolean passwordCheck = userService.failPasswordCheck(loginInfo);
+			if (!passwordCheck) {
+				// 비밀번호가 틀렸을 경우 에러코드 1 반환
+				setDefaultFailureUrl("/login?error=true&exception=1");
+			}
+		} else {
+			// 신규가입 페이지로 이동
+			if (!username.equals("") && !tel.equals("") && !password.equals("")) {
+				setDefaultFailureUrl("/create");
+			} else {
+				// 이름, 연락처, 비밀번호 중 값이 없는 경우 에러코드 2 반환
+				setDefaultFailureUrl("/login?error=true&exception=2");
+			}
+		}
+
 		super.onAuthenticationFailure(request, response, exception);
 	}
 }

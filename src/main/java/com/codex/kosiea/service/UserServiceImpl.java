@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -73,8 +74,27 @@ public class UserServiceImpl implements UserService {
             param.put("lunar_yn", 0);
         }
 
-        System.out.println("param = " + param.toString());
-
         userDAO.insertUser(param);
+    }
+
+    // 아이디 존재 여부 체크
+    @Override
+    public int idFailYnCheck(Map<String, Object> loginInfo) {
+        int result = userDAO.idFailYnCheck(loginInfo);
+        return result;
+    }
+
+    // 비밀번호 정합성 체크
+    @Override
+    public boolean failPasswordCheck(Map<String, Object> loginInfo) {
+
+        String encodePassword = userDAO.failPasswordCheck(loginInfo);
+
+        String password = (String) loginInfo.get("password");
+
+        boolean result = passwordEncoder.matches(password, encodePassword);
+
+
+        return result;
     }
 }

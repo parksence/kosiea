@@ -34,6 +34,18 @@ public class PrincipalDetails implements UserDetails {
         return authorities;
     }
 
+    public int getNo() {
+        return userDTO.getNO();
+    }
+
+    public String getName() {
+        return userDTO.getNAME();
+    }
+
+    @Override
+    public String getPassword() {
+        return userDTO.getPASSWORD();
+    }
 
     public String getCreateDate() {
         return userDTO.getCREATE_DATE();
@@ -43,7 +55,6 @@ public class PrincipalDetails implements UserDetails {
         return userDTO.getUPDATE_DATE();
     }
 
-    // 이름
     @Override
     public String getUsername() {
         return userDTO.getNAME();
@@ -54,11 +65,6 @@ public class PrincipalDetails implements UserDetails {
     }
     public String getRoleNm() {
         return userDTO.getROLE_NM();
-    }
-
-    @Override
-    public String getPassword() {
-        return userDTO.getPASSWORD();
     }
 
     @Override

@@ -37,6 +37,9 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").authenticated()
+                .antMatchers("/update").authenticated()
+                .antMatchers("/delete").authenticated()
+                .antMatchers("/form").authenticated()
                 .anyRequest().permitAll()
                 .and()
         .formLogin()
@@ -74,10 +77,12 @@ public class SecurityConfig {
                     "/fonts/**",
                     "/js/**",
                     "/static/**",
+                    "/mapper/**",
                     "/module/**",
                     "/webjars/**",
                     "/less/**",
-                    "/img/**"
+                    "/img/**",
+                    "/assets/**"
                 );
     }
 
@@ -85,4 +90,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
+
 }

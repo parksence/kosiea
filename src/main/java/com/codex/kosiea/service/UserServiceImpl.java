@@ -37,7 +37,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void insertUser(Map<String, Object> param) {
+    public int insertUser(Map<String, Object> param) {
+
+        System.out.println("param.toString() = " + param.toString());
+        
         // 비밀번호 암호화
         String pw = (String) param.get("password");
         param.put("password", passwordEncoder.encode(pw));
@@ -74,7 +77,7 @@ public class UserServiceImpl implements UserService {
             param.put("lunar_yn", 0);
         }
 
-        userDAO.insertUser(param);
+        return userDAO.insertUser(param);
     }
 
     // 아이디 존재 여부 체크

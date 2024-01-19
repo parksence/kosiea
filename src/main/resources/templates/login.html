@@ -88,6 +88,11 @@
                     <img src="/assets/media/logos/KOSIEA_LOGO_COLOR.svg" class="h-100px mx-auto mw-100 w-200px w-lg-300px mb-10 mb-lg-20" alt="">
                 </div>
             </div>
+            <!-- 비밀번호 오류 메시지 부분 추가 -->
+            <div th:if="${exception == 1}" id="alert_message">
+                비밀번호를 잘못 입력했습니다. <br>
+                입력하신 내용을 다시 확인해주세요.
+            </div>
             <div class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12">
                 <div class="bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10 w-100">
                     <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px w-100">
@@ -133,4 +138,20 @@
         </div>
     </div>
 </body>
+<style>
+    #alert_message {
+        position: fixed;
+        left:0;
+        width:100%;
+        line-height: 1.5;
+        padding:1rem !important;
+        text-align: center;
+        background-color: rgba(0,0,0,0.5);
+        color:white;
+        z-index:999;
+        transition: all .5s;
+        opacity: 1;
+        top:0;
+    }
+</style>
 </html>

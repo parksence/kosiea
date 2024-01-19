@@ -45,7 +45,8 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 		} else {
 			// 신규가입 페이지로 이동
 			if (!username.equals("") && !tel.equals("") && !password.equals("")) {
-				setDefaultFailureUrl("/create");
+				response.sendRedirect("/create"); // 리다이렉션 추가
+				return;
 			} else {
 				// 이름, 연락처, 비밀번호 중 값이 없는 경우 에러코드 2 반환
 				setDefaultFailureUrl("/login?error=true&exception=2");

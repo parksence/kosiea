@@ -11,7 +11,7 @@ import java.util.Map;
 public interface UserDAO {
     Map<String, Object> userChk(Map<String, Object> param);
     ArrayList<UserDTO> findByUserID(String username);
-    void insertUser(Map<String, Object> param);
+    int insertUser(Map<String, Object> param);
     int idFailYnCheck(Map<String, Object> loginInfo);
     String failPasswordCheck(Map<String, Object> loginInfo);
 }

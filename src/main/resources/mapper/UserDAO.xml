@@ -43,7 +43,6 @@
 		  , UPDATE_DT = CURRENT_TIMESTAMP
 	</insert>
 
-
 	<select id="idFailYnCheck" resultType="int" parameterType="map">
 		SELECT COUNT(*) AS cnt
 		  FROM MEMBERS
@@ -57,5 +56,35 @@
 		 WHERE NAME = #{name}
 		   AND REPLACE(TEL, '-', '') = #{tel}
 	</select>
+
+	<select id="selectUserInfo" resultType="User" parameterType="map">
+		SELECT *
+		  FROM MEMBERS
+		 WHERE NAME = #{NAME}
+		   AND TEL = #{TEL}
+	</select>
+
+	<!-- 계정 등록 -->
+	<insert id="updateUser" parameterType="map">
+		UPDATE MEMBERS
+		   SET PASSWORD = #{password}
+		     , KOB = #{kob}
+		     , GENDER = #{gender}
+		     , COMPANY = #{company}
+		     , POSITION = #{position}
+		     , BIRTHDAY = #{birthday}
+		     <if test="lunar_birthday != null and lunar_birthday != ''">
+		     , LUNAR = #{lunar_birthday}
+		     </if>
+		     , LUNAR_YN = #{lunar_yn}
+		     , ADDR1 = #{addr1}
+		     , ADDR2 = #{addr2}
+		     , TEL = #{tel}
+		     , FILE_LOCATION = #{file_location}
+		     , FILE_LOCATION2 = #{file_location2}
+		     , UPDATE_DT = CURRENT_TIMESTAMP
+		 WHERE NAME = #{loginUserName}
+		   AND TEL = #{loginUserTel}
+	</insert>
 
 </mapper>

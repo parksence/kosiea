@@ -38,13 +38,25 @@ public class PrincipalDetails implements UserDetails {
         return userDTO.getNO();
     }
 
-    public String getName() {
+    public String getNAME() {
         return userDTO.getNAME();
     }
 
     @Override
     public String getPassword() {
         return userDTO.getPASSWORD();
+    }
+
+    public String getADDR1() {
+        return userDTO.getADDR1();
+    }
+
+    public String getADDR2() {
+        return userDTO.getADDR2();
+    }
+
+    public String getTEL() {
+        return userDTO.getTEL();
     }
 
     public String getCreateDate() {

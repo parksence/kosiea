@@ -1,5 +1,6 @@
 package com.codex.kosiea.service;
 
+import com.codex.kosiea.config.security.auth.PrincipalDetails;
 import com.codex.kosiea.dao.UserDAO;
 import com.codex.kosiea.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
     public int insertUser(Map<String, Object> param) {
 
         System.out.println("param.toString() = " + param.toString());
-        
+
         // 비밀번호 암호화
         String pw = (String) param.get("password");
         param.put("password", passwordEncoder.encode(pw));
@@ -90,14 +91,59 @@ public class UserServiceImpl implements UserService {
     // 비밀번호 정합성 체크
     @Override
     public boolean failPasswordCheck(Map<String, Object> loginInfo) {
-
         String encodePassword = userDAO.failPasswordCheck(loginInfo);
-
         String password = (String) loginInfo.get("password");
-
         boolean result = passwordEncoder.matches(password, encodePassword);
 
-
         return result;
+    }
+
+    @Override
+    public UserDTO selectUserInfo(PrincipalDetails authUser) {
+        UserDTO userDTO = userDAO.selectUserInfo(authUser);
+        return userDTO;
+    }
+
+    @Override
+    public int updateUser(Map<String, Object> param) {
+        System.out.println("param.toString() = " + param.toString());
+
+        // 비밀번호 암호화
+        String pw = (String) param.get("password");
+        param.put("password", passwordEncoder.encode(pw));
+
+        // 전화번호 포맷팅
+        String tel_sum = (String) param.get("tel[0]");
+        tel_sum += "-";
+        tel_sum += (String) param.get("tel[1]");
+        tel_sum += "-";
+        tel_sum += (String) param.get("tel[2]");
+
+        // 결과 출력
+        param.put("tel", tel_sum);
+
+        // 직장 주소
+        String work_location = "(";
+        work_location += (String) param.get("addr1-1");
+        work_location += ")";
+        work_location += (String) param.get("addr1-2");
+
+        param.put("addr1", work_location);
+
+        // 자택 주소
+        String home_location = "(";
+        home_location += (String) param.get("addr2-1");
+        home_location += ")";
+        home_location += (String) param.get("addr2-2");
+
+        param.put("addr2", home_location);
+
+        // 음력 생일
+        String lunar = (String) param.get("lunar_birthday");
+        if(lunar.equals("")){
+            param.put("lunar_yn", 0);
+        }
+
+        return userDAO.updateUser(param);
     }
 }

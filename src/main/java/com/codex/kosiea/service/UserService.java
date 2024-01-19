@@ -1,5 +1,7 @@
 package com.codex.kosiea.service;
 
+import com.codex.kosiea.config.security.auth.PrincipalDetails;
+import com.codex.kosiea.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -12,4 +14,6 @@ public interface UserService {
     int insertUser(Map<String, Object> param); // 사용자 등록
     int idFailYnCheck(Map<String, Object> loginInfo);
     boolean failPasswordCheck(Map<String, Object> loginInfo);
+    UserDTO selectUserInfo(PrincipalDetails authUser);
+    int updateUser(Map<String, Object> param);
 }

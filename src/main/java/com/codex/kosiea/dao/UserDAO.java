@@ -1,5 +1,6 @@
 package com.codex.kosiea.dao;
 
+import com.codex.kosiea.config.security.auth.PrincipalDetails;
 import com.codex.kosiea.dto.UserDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,4 +15,6 @@ public interface UserDAO {
     int insertUser(Map<String, Object> param);
     int idFailYnCheck(Map<String, Object> loginInfo);
     String failPasswordCheck(Map<String, Object> loginInfo);
+    UserDTO selectUserInfo(PrincipalDetails authUser);
+    int updateUser(Map<String, Object> param);
 }

@@ -40,6 +40,8 @@ public class SecurityConfig {
                 .antMatchers("/update").authenticated()
                 .antMatchers("/delete").authenticated()
                 .antMatchers("/form").authenticated()
+                .antMatchers("/form/**").authenticated()
+                .antMatchers("/search").authenticated()
                 .anyRequest().permitAll()
                 .and()
         .formLogin()

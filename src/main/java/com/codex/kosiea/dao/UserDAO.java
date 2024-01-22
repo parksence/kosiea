@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -16,5 +17,8 @@ public interface UserDAO {
     int idFailYnCheck(Map<String, Object> loginInfo);
     String failPasswordCheck(Map<String, Object> loginInfo);
     UserDTO selectUserInfo(PrincipalDetails authUser);
+    UserDTO selectUserInfo(UserDTO userDTO);
     int updateUser(Map<String, Object> param);
+    void insertLog(Map<String, Object> param);
+    List<UserDTO> selectUserList(Map<String, Object> param);
 }

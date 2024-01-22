@@ -1,5 +1,6 @@
 package com.codex.kosiea.service;
 
+import com.codex.kosiea.common.Utils;
 import com.codex.kosiea.config.security.auth.PrincipalDetails;
 import com.codex.kosiea.dao.UserDAO;
 import com.codex.kosiea.dto.UserDTO;
@@ -8,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -78,6 +80,9 @@ public class UserServiceImpl implements UserService {
             param.put("lunar_yn", 0);
         }
 
+        // 로그 추가
+        userDAO.insertLog(param);
+
         return userDAO.insertUser(param);
     }
 
@@ -102,6 +107,12 @@ public class UserServiceImpl implements UserService {
     public UserDTO selectUserInfo(PrincipalDetails authUser) {
         UserDTO userDTO = userDAO.selectUserInfo(authUser);
         return userDTO;
+    }
+
+    @Override
+    public UserDTO selectUserInfo(UserDTO userDTO) {
+        UserDTO userDTOs = userDAO.selectUserInfo(userDTO);
+        return userDTOs;
     }
 
     @Override
@@ -144,6 +155,14 @@ public class UserServiceImpl implements UserService {
             param.put("lunar_yn", 0);
         }
 
+        // 로그 추가
+        userDAO.insertLog(param);
+
         return userDAO.updateUser(param);
+    }
+
+    @Override
+    public List<UserDTO> selectUserList(Map<String, Object> param) {
+        return userDAO.selectUserList(param);
     }
 }

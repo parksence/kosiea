@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -71,6 +73,27 @@ public class HomeController {
         return modelView;
     }
 
+    @RequestMapping(value = "/search", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
+    public ModelAndView search(ModelAndView modelView, Model model, @AuthenticationPrincipal PrincipalDetails authUser,
+                               HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> param) throws Exception {
+
+        if (authUser == null) {
+            modelView.setViewName("redirect:/");
+            return modelView;
+        }
+
+        System.out.println("param = " + param.toString());
+
+        // 회원 조회
+        List<UserDTO> userDTOList = userService.selectUserList(param);
+
+        modelView.addObject("userList", userDTOList);
+
+        modelView.setViewName("/search");
+        return modelView;
+    }
+
     @RequestMapping(value = "/form", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView update(ModelAndView modelView, Model model, @AuthenticationPrincipal PrincipalDetails authUser) throws Exception {
 
@@ -78,6 +101,7 @@ public class HomeController {
             modelView.setViewName("redirect:/");
             return modelView;
         }
+
         UserDTO userDTO = userService.selectUserInfo(authUser);
         modelView.addObject(userDTO);
 

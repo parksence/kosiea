@@ -5,6 +5,7 @@ import com.codex.kosiea.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -15,5 +16,7 @@ public interface UserService {
     int idFailYnCheck(Map<String, Object> loginInfo);
     boolean failPasswordCheck(Map<String, Object> loginInfo);
     UserDTO selectUserInfo(PrincipalDetails authUser);
+    UserDTO selectUserInfo(UserDTO userDTO);
     int updateUser(Map<String, Object> param);
+    List<UserDTO> selectUserList(Map<String, Object> param);
 }

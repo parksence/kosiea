@@ -64,6 +64,13 @@
 		   AND TEL = #{TEL}
 	</select>
 
+	<select id="selectUserInfo" resultType="User" parameterType="map">
+		SELECT *
+		FROM MEMBERS
+		WHERE NAME = #{NAME}
+		  AND TEL = #{TEL}
+	</select>
+
 	<!-- 계정 등록 -->
 	<insert id="updateUser" parameterType="map">
 		UPDATE MEMBERS
@@ -80,11 +87,50 @@
 		     , ADDR1 = #{addr1}
 		     , ADDR2 = #{addr2}
 		     , TEL = #{tel}
+			<if test="file_location != null and file_location != ''">
 		     , FILE_LOCATION = #{file_location}
+			</if>
+		    <if test="file_location2 != null and file_location2 != ''">
 		     , FILE_LOCATION2 = #{file_location2}
+		    </if>
 		     , UPDATE_DT = CURRENT_TIMESTAMP
 		 WHERE NAME = #{loginUserName}
 		   AND TEL = #{loginUserTel}
 	</insert>
+
+	<insert id="insertLog" parameterType="map">
+		INSERT INTO MEMBER_LOG
+		SET PASSWORD = #{password}
+		  , NAME = #{name}
+		  , KOB = #{kob}
+		  , GENDER = #{gender}
+		  , COMPANY = #{company}
+		  , POSITION = #{position}
+		  , BIRTHDAY = #{birthday}
+		  <if test="lunar_birthday != null and lunar_birthday != ''">
+		  , LUNAR = #{lunar_birthday}
+		  </if>
+		  , LUNAR_YN = #{lunar_yn}
+		  , ADDR1 = #{addr1}
+		  , ADDR2 = #{addr2}
+		  , TEL = #{tel}
+		  , FILE_LOCATION = #{file_location}
+		  , FILE_LOCATION2 = #{file_location2}
+		  , IP = #{access_ip}
+		  , CREATE_DT = CURRENT_TIMESTAMP
+	</insert>
+
+	<select id="selectUserList" resultType="User" parameterType="map">
+		SELECT *
+		  FROM MEMBERS
+		<where>
+			<if test="search != null and search != ''">
+				AND ( NAME LIKE CONCAT('%', #{search}, '%')
+				OR COMPANY LIKE CONCAT('%', #{search}, '%')
+				OR POSITION LIKE CONCAT('%', #{search}, '%')
+				)
+			</if>
+		</where>
+	</select>
 
 </mapper>

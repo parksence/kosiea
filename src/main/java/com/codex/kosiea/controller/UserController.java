@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -129,6 +130,7 @@ public class UserController {
 
     // 사용자 수정
     @RequestMapping(value = "/update", method = { RequestMethod.GET, RequestMethod.POST })
+    @ResponseBody
     public void update(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> param,
                      ModelAndView modelView, @AuthenticationPrincipal PrincipalDetails authUser,
                      @RequestParam(name = "avatar", required = false) MultipartFile file,
@@ -206,8 +208,16 @@ public class UserController {
         }
 
         // 로그인한 사용자 정보 전달
-        String loginUserName = authUser.getNAME();
-        String loginUserTel = authUser.getTEL();
+        String loginUserName = (String) param.get("name");
+
+        System.out.println("param = " + param.toString());
+
+        // 전화번호 포맷팅
+        String loginUserTel = (String) param.get("origin_tel[0]");
+        loginUserTel += "-";
+        loginUserTel += (String) param.get("origin_tel[1]");
+        loginUserTel += "-";
+        loginUserTel += (String) param.get("origin_tel[2]");
 
         param.put("loginUserName", loginUserName);
         param.put("loginUserTel", loginUserTel);
@@ -221,33 +231,41 @@ public class UserController {
         int result = userService.updateUser(param);
         System.out.println("result = " + result);
         if(result > 0) {
-            response.sendRedirect("/");
+            response.sendRedirect("/form/"+loginUserTel);
         }
     }
 
-    @RequestMapping(value = "/form/{name}", method = { RequestMethod.GET, RequestMethod.POST })
-    public ModelAndView update(ModelAndView modelView, Model model, @AuthenticationPrincipal PrincipalDetails authUser,
+    @RequestMapping(value = "/form/{tel}", method = { RequestMethod.GET, RequestMethod.POST })
+    public ModelAndView formTel(ModelAndView modelView, Model model, @AuthenticationPrincipal PrincipalDetails authUser,
                                HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> param,
-                               @PathVariable String name) throws Exception {
+                               @PathVariable String tel) throws Exception {
 
         if (authUser == null) {
             modelView.setViewName("redirect:/");
             return modelView;
         }
 
-        System.out.println("name = " + name);
-        UserDTO userDTO = new UserDTO();
-        userDTO.setNAME(name);
+        Map<String, Object> hm = new HashMap<>();
+        hm = userService.selectUserObject(tel);
 
-        userService.selectUserInfo(userDTO);
+        // null 값들도 hm에 포함하여 전달
+        if(hm.get("FILE_LOCATION") == null) {
+           hm.put("FILE_LOCATION", "");
+        }
+
+        if(hm.get("FILE_LOCATION2") == null) {
+            hm.put("FILE_LOCATION2", "");
+        }
+        if(hm.get("LUNAR") == null) {
+            hm.put("LUNAR", "");
+        }
 
         // 로그인 정보 전달
-//        UserDTO userDTO = userService.selectUserInfo(authUser);
-        modelView.addObject(userDTO);
+        modelView.addObject("userDTO", hm);
 
         // 우편번호 주소 나누기
-        String addr1 = userDTO.getADDR1();
-        String addr2 = userDTO.getADDR2();
+        String addr1 = (String) hm.get("ADDR1");
+        String addr2 = (String) hm.get("ADDR2");
         // 우편번호 추출
         String postalCode = addr1.replaceAll("\\(([^)]+)\\).*", "$1");
         String postalCode2 = addr2.replaceAll("\\(([^)]+)\\).*", "$1");
@@ -261,7 +279,7 @@ public class UserController {
         modelView.addObject("postalCode2", postalCode2);
         modelView.addObject("address2", address2);
 
-        String phoneNumber = userDTO.getTEL();
+        String phoneNumber = (String) hm.get("TEL");
         String[] telArray = phoneNumber.split("-");
 
         // 전화번호 전달
@@ -272,34 +290,6 @@ public class UserController {
         modelView.setViewName("/form");
         return modelView;
     }
-
-//    @RequestMapping(value = "/myData/{h_id}", method = { RequestMethod.GET, RequestMethod.POST })
-//    public ModelAndView myDataUserView(Model model, HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> param,
-//                                       ModelAndView modelView, @AuthenticationPrincipal PrincipalDetails authUser, @PathVariable String h_id) throws IOException {
-//
-//        // 최고관리자가 아니면 메인 페이지로 이동
-//        if(!authUser.getRoleCd().toString().equals("999")) {
-//            modelView.setViewName("redirect:/");
-//            return modelView;
-//        }
-//
-//        // 권한 코드
-//        modelView.addObject("role_cd", authUser.getRoleCd().toString());
-//        // 로그인한 사용자 아이디
-//        modelView.addObject("user_id", authUser.getUsername().toString());
-//        // 선택한 유저 아이디 전달
-//        param.put("h_id", h_id);
-//
-//        // 로그인 정보 전달
-//        UserDTO userDTO = new UserDTO();
-//        userDTO.setH_ID(h_id);
-//        UserDTO userInfo = userService.selectUserInfo(userDTO);
-//
-//        modelView.addObject("user_info", userInfo);
-//
-//        modelView.setViewName("/web/user/myData");
-//        return modelView;
-//    }
 
 //    @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
 //    public void delete(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> param,

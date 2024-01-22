@@ -103,7 +103,7 @@ public class HomeController {
         }
 
         UserDTO userDTO = userService.selectUserInfo(authUser);
-        modelView.addObject(userDTO);
+        modelView.addObject("userDTO", userDTO);
 
         // 우편번호 주소 나누기
         String addr1 = userDTO.getADDR1();

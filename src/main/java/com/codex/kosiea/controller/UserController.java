@@ -162,8 +162,15 @@ public class UserController {
 
         // 이미지가 업로드 되었는지 확인
         if(file != null && !file.isEmpty()) {
+
+            System.out.println("path = " + bPath);
+            System.out.println("profilePath = " + profilePath);
+
             // 파일 저장 경로
-            String uploadDir = ResourceUtils.getFile("classpath:static/profile/").getAbsolutePath() + "/";
+            String uploadDir = bPath;
+            // 아래 코드는 로컬에서 테스트할 때 사용
+            // String uploadDir = ResourceUtils.getFile("classpath:static/profile/").getAbsolutePath() + "/";
+
 
             // 파일 저장 경로 설정
             File folder = new File(uploadDir);
@@ -186,6 +193,7 @@ public class UserController {
                 int index = path.toString().indexOf(staticPart);
                 if (index != -1) {
                     result = path.toString().substring(index + staticPart.length());
+                    System.out.println(result);
                 } else {
                     System.out.println("String does not contain 'static'");
                 }
@@ -199,9 +207,14 @@ public class UserController {
         // 이미지가 업로드 되었는지 확인
         if(file2 != null && !file2.isEmpty()) {
             // 파일 저장 경로
-            String uploadDir = ResourceUtils.getFile("classpath:static/bc/").getAbsolutePath() + "/";
+            String uploadDir = profilePath;
+
+            // 아래 코드는 로컬 테스트할 때 사용
+            // String uploadDir = ResourceUtils.getFile("classpath:static/bc/").getAbsolutePath() + "/";
+
             // 파일 저장 경로 설정
             File folder = new File(uploadDir);
+            System.out.println("folder.toString() = " + folder.toString());
 
             if(!folder.exists()) {
                 folder.mkdirs();
@@ -211,6 +224,7 @@ public class UserController {
                 byte[] bytes = file2.getBytes();
                 String fileName = timeStamp + "_" + file2.getOriginalFilename();
                 Path path = Paths.get(uploadDir + fileName);
+                System.out.println("path.toString() = " + path.toString());
 
                 // 파일 저장
                 file2.transferTo(new File(path.toString()));
@@ -221,6 +235,7 @@ public class UserController {
                 int index = path.toString().indexOf(staticPart);
                 if (index != -1) {
                     result = path.toString().substring(index + staticPart.length());
+                    System.out.println(result);
                 } else {
                     System.out.println("String does not contain 'static'");
                 }

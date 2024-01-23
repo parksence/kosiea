@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int insertUser(Map<String, Object> param) {
 
-        System.out.println("param.toString() = " + param.toString());
+        System.out.println("@@param.toString() = " + param.toString());
 
         // 비밀번호 암호화
         String pw = (String) param.get("password");

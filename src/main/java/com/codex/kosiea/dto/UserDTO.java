@@ -26,6 +26,7 @@ public class UserDTO implements Serializable {
     private String LUNAR;
     private int LUNAR_YN;
     private String TEL;
+    private String GIFT_YN;
 //    private String TYPE1;
 //    private String TYPE2;
 //    private String TYPE3;

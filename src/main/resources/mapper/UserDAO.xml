@@ -37,6 +37,7 @@
 		  , TEL = #{tel}
 		  , FILE_LOCATION = #{file_location}
 		  , FILE_LOCATION2 = #{file_location2}
+		  , GIFT_YN = #{gift_yn}
 		  , ROLE_CD = '1'
 		  , ROLE_NM = '사용자'
 		  , CREATE_DT = CURRENT_TIMESTAMP
@@ -92,6 +93,7 @@
 		    <if test="file_location2 != null and file_location2 != ''">
 		     , FILE_LOCATION2 = #{file_location2}
 		    </if>
+		     , GIFT_YN = #{gift_yn}
 		     , UPDATE_DT = CURRENT_TIMESTAMP
 		 WHERE NAME = #{loginUserName}
 		   AND TEL = #{loginUserTel}
@@ -115,6 +117,7 @@
 		  , TEL = #{tel}
 		  , FILE_LOCATION = #{file_location}
 		  , FILE_LOCATION2 = #{file_location2}
+		  , GIFT_YN = #{gift_yn}
 		  , IP = #{access_ip}
 		  , CREATE_DT = CURRENT_TIMESTAMP
 	</insert>

@@ -34,7 +34,7 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 			System.out.println("[ BeforeActionInterceptor ]");
 
 			for (GrantedAuthority user_auth : userDetails.getAuthorities()) {
-				System.out.println("user_auth.toString() = " + user_auth.toString());
+//				System.out.println("user_auth.toString() = " + user_auth.toString());
 				if (user_auth.toString().equals("사용자")) {
 					//System.out.println("user_auth : " + user_auth);
 					request.setAttribute("admin", true);

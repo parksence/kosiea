@@ -185,11 +185,6 @@
         document.getElementById('addr2-1').value = '';
         document.getElementById('addr2-2').value = '';
 
-        // 연락처 초기화
-        document.getElementById('tel[0]').value = '';
-        document.getElementById('tel[1]').value = '';
-        document.getElementById('tel[2]').value = '';
-
         // 이미지 초기화
         $('[data-kt-image-input-action="cancel"]').click();
 
@@ -555,6 +550,23 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-6">
+                                                <label class="col-lg-3 col-form-label required fw-semibold fs-6">명절 선물 희망 배송지</label>
+                                                <div class="col-lg-7 fv-row">
+                                                    <div class="d-flex align-items-center mt-3">
+                                                        <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
+                                                            <input class="form-check-input" id="home" name="gift_yn" type="radio"
+                                                                   value="자택" th:checked="${userDTO.GIFT_YN == '자택'}"/>
+                                                            <span class="fw-semibold ps-2 fs-6">자택</span>
+                                                        </label>
+                                                        <label class="form-check form-check-custom form-check-inline form-check-solid">
+                                                            <input class="form-check-input" id="co" name="gift_yn" type="radio"
+                                                                   value="직장" th:checked="${userDTO.GIFT_YN == '직장'}"/>
+                                                            <span class="fw-semibold ps-2 fs-6">직장</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-6">
                                                 <label class="col-lg-3 col-form-label required fw-semibold fs-6">연락처</label>
                                                 <div class="col-lg-7">
                                                     <div class="row">
@@ -564,21 +576,21 @@
                                                         <div class="col-lg-4 fv-row fv-plugins-icon-container">
                                                             <input type="tel" name="tel[0]" id="tel[0]"
                                                                    class="form-control form-control-lg form-control-solid mb-3 mb-lg-0"
-                                                                   th:value="${tel1}" size="3">
+                                                                   th:value="${tel1}" size="3" readonly>
                                                             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
                                                         </div>
 
                                                         <div class="col-lg-4 fv-row fv-plugins-icon-container">
                                                             <input type="tel" name="tel[1]" id="tel[1]"
                                                                    class="form-control form-control-lg form-control-solid"
-                                                                   th:value="${tel2}" size="4">
+                                                                   th:value="${tel2}" size="4" readonly>
                                                             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
                                                         </div>
 
                                                         <div class="col-lg-4 fv-row fv-plugins-icon-container">
                                                             <input type="tel" name="tel[2]" id="tel[2]"
                                                                    class="form-control form-control-lg form-control-solid"
-                                                                   th:value="${tel3}" size="4">
+                                                                   th:value="${tel3}" size="4" readonly>
                                                             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
                                                         </div>
                                                     </div>

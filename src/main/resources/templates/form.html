@@ -52,9 +52,6 @@
 </style>
 <script th:inline="javascript">
 
-    // var test = [[${userDTO}]];
-    // console.log(test, 'test');
-
     // 데이터 입력 검증 로직
     const validateInput = (id, message) => {
         var element = document.getElementById(id);
@@ -158,42 +155,46 @@
     // 초기화 버튼 클릭
     function userReset() {
 
-        // // 프로필 사진 초기화
-        // document.getElementById('kt_account_profile_details_form').reset();
-        //
-        // // 비밀번호 초기화
-        // document.getElementById('password').value = '';
-        //
-        // // 성별 초기화
-        // document.getElementById('male').checked = false;
-        // document.getElementById('female').checked = false;
-        //
-        // // 업종, 소속, 직책 초기화
-        // document.getElementById('kob').value = '';
-        // document.getElementById('company').value = '';
-        // document.getElementById('position').value = '';
-        //
-        // // 생년월일 초기화
-        // document.getElementById('birthday').value = '';
-        // document.getElementById('lunar_yn').checked = false;
-        //
-        // // 음력 생일 초기화
-        // document.getElementById('lunar').value = '';
-        //
-        // // 직장 주소 초기화
-        // document.getElementById('addr1-1').value = '';
-        // document.getElementById('addr1-2').value = '';
-        //
-        // // 자택 주소 초기화
-        // document.getElementById('addr2-1').value = '';
-        // document.getElementById('addr2-2').value = '';
-        //
-        // // 연락처 초기화
-        // document.getElementById('tel[0]').value = '';
-        // document.getElementById('tel[1]').value = '';
-        // document.getElementById('tel[2]').value = '';
-        // console.log('test')
+        // 프로필 사진 초기화
+        document.getElementById('kt_account_profile_details_form').reset();
 
+        // 비밀번호 초기화
+        document.getElementById('password').value = '';
+
+        // 성별 초기화
+        document.getElementById('male').checked = true;
+        document.getElementById('female').checked = false;
+
+        // 업종, 소속, 직책 초기화
+        document.getElementById('kob').value = '';
+        document.getElementById('company').value = '';
+        document.getElementById('position').value = '';
+
+        // 생년월일 초기화
+        document.getElementById('birthday').value = '';
+        document.getElementById('lunar_yn').checked = false;
+
+        // 음력 생일 초기화
+        document.getElementById('lunar').value = '';
+
+        // 직장 주소 초기화
+        document.getElementById('addr1-1').value = '';
+        document.getElementById('addr1-2').value = '';
+
+        // 자택 주소 초기화
+        document.getElementById('addr2-1').value = '';
+        document.getElementById('addr2-2').value = '';
+
+        // 연락처 초기화
+        document.getElementById('tel[0]').value = '';
+        document.getElementById('tel[1]').value = '';
+        document.getElementById('tel[2]').value = '';
+
+        // 이미지 초기화
+        $('[data-kt-image-input-action="cancel"]').click();
+
+        // 음력 칸 hidden
+        toggle_lunar_birthday_visible();
     }
 </script>
 <body id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-hoverable="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-toolbar-enabled="true" class="app-default">
@@ -341,7 +342,11 @@
                                                          data-kt-image-input="true"
                                                          style="background-image: url('../assets/media/svg/avatars/blank.svg')">
                                                         <div class="image-input-wrapper w-125px h-125px"
-                                                             th:style="'background-image: url(' + ${userDTO.FILE_LOCATION} + ');'"></div>
+                                                             th:style="${userDTO.FILE_LOCATION != null} ?
+                                                             'background-image: url(' + ${userDTO.FILE_LOCATION} + ');' :
+                                                             'background-image: '+ ${userDTO.FILE_LOCATION} +';'
+                                                            ">
+                                                        </div>
                                                         <label class="btn btn-icon btn-circle btn-active-color-primary bg-body shadow"
                                                                data-kt-image-input-action="change"
                                                                data-bs-toggle="tooltip" title="프로필 사진 변경">
@@ -352,11 +357,11 @@
                                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                               data-kt-image-input-action="cancel"
                                                               data-bs-toggle="tooltip" title="프로필 사진 제거">
-                                                      <i class="ki-duotone ki-cross fs-2">
-                                                         <span class="path1"></span>
-                                                         <span class="path2"></span>
-                                                      </i>
-                                                   </span>
+                                                          <i class="ki-duotone ki-cross fs-2">
+                                                             <span class="path1"></span>
+                                                             <span class="path2"></span>
+                                                          </i>
+                                                       </span>
                                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                               data-kt-image-input-action="remove"
                                                               data-bs-toggle="tooltip" title="프로필 사진 제거">
@@ -375,7 +380,11 @@
                                                          data-kt-image-input="true"
                                                          style="background-image: url('../assets/media/svg/files/blank-image.svg'); background-size: 200px 125px;">
                                                         <div class="image-input-wrapper w-200px h-125px"
-                                                             th:style="'background-image: url(' + ${userDTO.FILE_LOCATION2} + ');'"></div>
+                                                             th:style="${userDTO.FILE_LOCATION2 != null} ?
+                                                            'background-image: url(' + ${userDTO.FILE_LOCATION2} + ');' :
+                                                            'background-image: '+ ${userDTO.FILE_LOCATION2} +';'
+                                                            ">
+                                                        </div>
                                                         <label class="btn btn-icon btn-circle btn-active-color-primary bg-body shadow"
                                                                data-kt-image-input-action="change"
                                                                data-bs-toggle="tooltip" title="명함 사진 변경">
@@ -577,7 +586,7 @@
                                             </div>
                                         </div>
                                         <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                            <button type="reset" class="btn btn-light btn-active-light-primary me-2" onclick="userReset()">초기화</button>
+                                            <button class="btn btn-light btn-active-light-primary me-2" type="button" onclick="userReset()">초기화</button>
                                             <button type="button" class="btn btn-primary" id="kt_account_profile_details_submit" onclick="userUpdate();">저장</button>
                                         </div>
                                     </form>
@@ -604,6 +613,7 @@
 
     const toggle_lunar_birthday_visible = () => {
         const lunar_birthday_checked = $LUNAR_BIRTHDAY.prop('checked');
+
         if (lunar_birthday_checked) {
             $('#LUNAR_BIRTHDAY').css('display', 'flex');
         } else {

@@ -8,15 +8,7 @@ build/
 ### STS ###
 .apt_generated
 .classpath
-<<<<<<< HEAD
 application.properties
-=======
-<<<<<<< HEAD
-.properties
-=======
-application.properties
->>>>>>> lim
->>>>>>> d559e3591dcc5ee0b93cd4565c88eba04ba3d3c1
 .factorypath
 .project
 .settings

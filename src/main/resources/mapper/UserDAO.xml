@@ -64,24 +64,12 @@
 		   AND TEL = #{TEL}
 	</select>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> d559e3591dcc5ee0b93cd4565c88eba04ba3d3c1
 	<select id="selectUserObject" resultType="map" parameterType="String">
 		SELECT *
 		  FROM MEMBERS
 		 WHERE TEL = #{TEL}
 	</select>
 
->>>>>>> dc723814e0c8c6bff970897de3ad496b648acc4d
-<<<<<<< HEAD
-=======
->>>>>>> lim
->>>>>>> d559e3591dcc5ee0b93cd4565c88eba04ba3d3c1
 	<!-- 계정 등록 -->
 	<insert id="updateUser" parameterType="map">
 		UPDATE MEMBERS

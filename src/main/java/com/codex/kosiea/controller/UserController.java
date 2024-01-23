@@ -4,7 +4,12 @@ import com.codex.kosiea.common.Utils;
 import com.codex.kosiea.config.security.auth.PrincipalDetails;
 import com.codex.kosiea.dto.UserDTO;
 import com.codex.kosiea.service.UserService;
+import javassist.ClassPath;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
@@ -32,6 +37,15 @@ public class UserController {
     private UserService userService;
     private String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
+    @Value("${files.external.bc}")
+    private String bPath;
+
+    @Value("${files.external.profile}")
+    private String profilePath;
+
     // 사용자 등록
     @RequestMapping(value = "/save", method = { RequestMethod.GET, RequestMethod.POST })
     public void save(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> param,
@@ -41,8 +55,15 @@ public class UserController {
 
         // 이미지가 업로드 되었는지 확인
         if(file != null && !file.isEmpty()) {
+
+            System.out.println("path = " + bPath);
+            System.out.println("profilePath = " + profilePath);
+
             // 파일 저장 경로
-            String uploadDir = ResourceUtils.getFile("classpath:static/profile/").getAbsolutePath() + "/";
+            String uploadDir = bPath;
+            // 아래 코드는 로컬에서 테스트할 때 사용
+            // String uploadDir = ResourceUtils.getFile("classpath:static/profile/").getAbsolutePath() + "/";
+
 
             // 파일 저장 경로 설정
             File folder = new File(uploadDir);
@@ -79,8 +100,11 @@ public class UserController {
         // 이미지가 업로드 되었는지 확인
         if(file2 != null && !file2.isEmpty()) {
             // 파일 저장 경로
-            String uploadDir = ResourceUtils.getFile("classpath:static/bc/").getAbsolutePath() + "/";
-            System.out.println("uploadDir = " + uploadDir.toString());
+            String uploadDir = profilePath;
+
+            // 아래 코드는 로컬 테스트할 때 사용
+            // String uploadDir = ResourceUtils.getFile("classpath:static/bc/").getAbsolutePath() + "/";
+
             // 파일 저장 경로 설정
             File folder = new File(uploadDir);
             System.out.println("folder.toString() = " + folder.toString());
@@ -138,8 +162,14 @@ public class UserController {
 
         // 이미지가 업로드 되었는지 확인
         if(file != null && !file.isEmpty()) {
+
+            System.out.println("path = " + bPath);
+            System.out.println("profilePath = " + profilePath);
+
             // 파일 저장 경로
-            String uploadDir = ResourceUtils.getFile("classpath:static/profile/").getAbsolutePath() + "/";
+            String uploadDir = bPath;
+            // 아래 코드는 로컬에서 테스트할 때 사용
+            // String uploadDir = ResourceUtils.getFile("classpath:static/profile/").getAbsolutePath() + "/";
 
             // 파일 저장 경로 설정
             File folder = new File(uploadDir);
@@ -162,6 +192,7 @@ public class UserController {
                 int index = path.toString().indexOf(staticPart);
                 if (index != -1) {
                     result = path.toString().substring(index + staticPart.length());
+                    System.out.println(result);
                 } else {
                     System.out.println("String does not contain 'static'");
                 }
@@ -175,9 +206,14 @@ public class UserController {
         // 이미지가 업로드 되었는지 확인
         if(file2 != null && !file2.isEmpty()) {
             // 파일 저장 경로
-            String uploadDir = ResourceUtils.getFile("classpath:static/bc/").getAbsolutePath() + "/";
+            String uploadDir = profilePath;
+
+            // 아래 코드는 로컬 테스트할 때 사용
+            // String uploadDir = ResourceUtils.getFile("classpath:static/bc/").getAbsolutePath() + "/";
+
             // 파일 저장 경로 설정
             File folder = new File(uploadDir);
+            System.out.println("folder.toString() = " + folder.toString());
 
             if(!folder.exists()) {
                 folder.mkdirs();
@@ -187,6 +223,7 @@ public class UserController {
                 byte[] bytes = file2.getBytes();
                 String fileName = timeStamp + "_" + file2.getOriginalFilename();
                 Path path = Paths.get(uploadDir + fileName);
+                System.out.println("path.toString() = " + path.toString());
 
                 // 파일 저장
                 file2.transferTo(new File(path.toString()));
@@ -197,6 +234,7 @@ public class UserController {
                 int index = path.toString().indexOf(staticPart);
                 if (index != -1) {
                     result = path.toString().substring(index + staticPart.length());
+                    System.out.println(result);
                 } else {
                     System.out.println("String does not contain 'static'");
                 }
@@ -231,7 +269,7 @@ public class UserController {
         int result = userService.updateUser(param);
         System.out.println("result = " + result);
         if(result > 0) {
-            response.sendRedirect("form/"+loginUserTel);
+            response.sendRedirect("/form/"+loginUserTel);
         }
     }
 
@@ -245,8 +283,8 @@ public class UserController {
             return modelView;
         }
 
-        Map<String, Object> hm = new HashMap<>();
-        hm = userService.selectUserObject(tel);
+        // 연락처로 회원정보 조회
+        Map<String, Object> hm = userService.selectUserObject(tel);
 
         // null 값들도 hm에 포함하여 전달
         if(hm.get("FILE_LOCATION") == null) {
@@ -287,7 +325,7 @@ public class UserController {
         modelView.addObject("tel2", telArray[1]);
         modelView.addObject("tel3", telArray[2]);
 
-        modelView.setViewName("form");
+        modelView.setViewName("/form");
         return modelView;
     }
 

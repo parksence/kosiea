@@ -37,6 +37,10 @@
     .menu-item .menu-link {
         padding-left: 0 !important;
     }
+    #FILE_LOCATION2 {
+        background-size:contain;
+        background-position:center;
+    }
     @media (max-width: 992px) {
         .col-lg-5 {
             flex: 0 0 auto;
@@ -343,6 +347,7 @@
                                                          data-kt-image-input="true"
                                                          style="background-image: url('../assets/media/svg/avatars/blank.svg')">
                                                         <div class="image-input-wrapper w-125px h-125px"
+                                                             id="FILE_LOCATION1"
                                                              th:style="${userDTO.FILE_LOCATION != null} ?
                                                              'background-image: url(' + ${userDTO.FILE_LOCATION} + ');' :
                                                              'background-image: '+ ${userDTO.FILE_LOCATION} +';'
@@ -381,6 +386,7 @@
                                                          data-kt-image-input="true"
                                                          style="background-image: url('../assets/media/svg/files/blank-image.svg'); background-size: 200px 125px;">
                                                         <div class="image-input-wrapper w-200px h-125px"
+                                                             id="FILE_LOCATION2"
                                                              th:style="${userDTO.FILE_LOCATION2 != null} ?
                                                             'background-image: url(' + ${userDTO.FILE_LOCATION2} + ');' :
                                                             'background-image: '+ ${userDTO.FILE_LOCATION2} +';'

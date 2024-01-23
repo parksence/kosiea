@@ -171,7 +171,6 @@ public class UserController {
             // 아래 코드는 로컬에서 테스트할 때 사용
             // String uploadDir = ResourceUtils.getFile("classpath:static/profile/").getAbsolutePath() + "/";
 
-
             // 파일 저장 경로 설정
             File folder = new File(uploadDir);
 
@@ -284,8 +283,8 @@ public class UserController {
             return modelView;
         }
 
-        Map<String, Object> hm = new HashMap<>();
-        hm = userService.selectUserObject(tel);
+        // 연락처로 회원정보 조회
+        Map<String, Object> hm = userService.selectUserObject(tel);
 
         // null 값들도 hm에 포함하여 전달
         if(hm.get("FILE_LOCATION") == null) {

@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,7 +41,10 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 			boolean passwordCheck = userService.failPasswordCheck(loginInfo);
 			if (!passwordCheck) {
 				// 비밀번호가 틀렸을 경우 에러코드 1 반환
-				setDefaultFailureUrl("/login?error=true&exception=1");
+//				setDefaultFailureUrl("/login?error=true&exception=1");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('비밀번호가 틀렸습니다.'); location.replace('/');</script>");
+				out.flush();
 			}
 		} else {
 			// 신규가입 페이지로 이동

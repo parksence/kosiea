@@ -21,6 +21,10 @@
 </head>
 <script th:inline="javascript">
 
+    const test = /*[[${exception}]]*/
+
+    console.log(test,'test');
+
     // 데이터 입력 검증 로직
     const validateInput = (id, message) => {
         var element = document.getElementById(id);

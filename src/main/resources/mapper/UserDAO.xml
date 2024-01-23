@@ -64,13 +64,6 @@
 		   AND TEL = #{TEL}
 	</select>
 
-	<select id="selectUserInfo" resultType="User" parameterType="map">
-		SELECT *
-		FROM MEMBERS
-		WHERE NAME = #{NAME}
-		  AND TEL = #{TEL}
-	</select>
-
 	<!-- 계정 등록 -->
 	<insert id="updateUser" parameterType="map">
 		UPDATE MEMBERS

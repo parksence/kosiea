@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>KOSIEA 회원 명부 수집 시스템</title>
-    <meta name="description" content="The most advanced Bootstrap 5 Admin Theme with 40 unique prebuilt layouts on Themeforest trusted by 100,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel versions. Grab your copy now and get life-time updates for free." />
-    <meta name="keywords" content="metronic, bootstrap, bootstrap 5, angular, VueJs, React, Asp.Net Core, Rails, Spring, Blazor, Django, Express.js, Node.js, Flask, Symfony & Laravel starter kits, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+    <meta name="description" content="한국 스마트 혁신기업가 협회 회원관리 시스템" />
+    <meta name="keywords" content="회원관리, 회원관리 시스템" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Metronic - The World's #1 Selling Bootstrap Admin Template - Metronic by KeenThemes" />
-    <meta property="og:url" content="https://keenthemes.com/metronic" />
-    <meta property="og:site_name" content="Metronic by Keenthemes" />
+
+    <meta property="og:title" content="한국 스마트 혁신기업가 협회 회원관리 시스템" />
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="../assets/media/logos/KOSIEA_LOGO_COLOR.svg" />
+    <meta property="og:description" content="한국 스마트 혁신기업가 협회 회원관리 시스템" />
     <link rel="canonical" href="https://preview.keenthemes.com/metronic8" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link href="../assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
@@ -35,6 +36,10 @@
     }
     .menu-item .menu-link {
         padding-left: 0 !important;
+    }
+    #FILE_LOCATION2 {
+        background-size:contain;
+        background-position:center;
     }
     @media (max-width: 992px) {
         .col-lg-5 {
@@ -340,7 +345,7 @@
                                                     <div class="image-input image-input-outline image-input-empty"
                                                          data-kt-image-input="true"
                                                          style="background-image: url('../assets/media/svg/avatars/blank.svg')">
-                                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: none;"></div>
+                                                        <div class="image-input-wrapper w-125px h-125px" id="FILE_LOCATION1" style="background-image: none;"></div>
                                                         <label class="btn btn-icon btn-circle btn-active-color-primary bg-body shadow"
                                                                data-kt-image-input-action="change"
                                                                data-bs-toggle="tooltip" title="프로필 사진 변경">
@@ -372,7 +377,7 @@
                                                     <div class="image-input image-input-outline image-input-empty"
                                                          data-kt-image-input="true"
                                                          style="background-image: url('../assets/media/svg/files/blank-image.svg'); background-size: 200px 125px;">
-                                                        <div class="image-input-wrapper w-200px h-125px" style="background-image: none;"></div>
+                                                        <div class="image-input-wrapper w-200px h-125px" id="FILE_LOCATION2" style="background-image: none;"></div>
                                                         <label class="btn btn-icon btn-circle btn-active-color-primary bg-body shadow"
                                                                data-kt-image-input-action="change"
                                                                data-bs-toggle="tooltip" title="명함 사진 변경">

@@ -56,7 +56,7 @@ public class HomeController {
         modelView.addObject("tel2", telArray[1]);
         modelView.addObject("tel3", telArray[2]);
 
-        modelView.setViewName("/form");
+        modelView.setViewName("form");
         return modelView;
     }
 
@@ -103,7 +103,7 @@ public class HomeController {
         }
 
         UserDTO userDTO = userService.selectUserInfo(authUser);
-        modelView.addObject(userDTO);
+        modelView.addObject("userDTO", userDTO);
 
         // 우편번호 주소 나누기
         String addr1 = userDTO.getADDR1();

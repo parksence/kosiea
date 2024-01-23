@@ -231,7 +231,7 @@ public class UserController {
         int result = userService.updateUser(param);
         System.out.println("result = " + result);
         if(result > 0) {
-            response.sendRedirect("/form/"+loginUserTel);
+            response.sendRedirect("form/"+loginUserTel);
         }
     }
 
@@ -287,7 +287,7 @@ public class UserController {
         modelView.addObject("tel2", telArray[1]);
         modelView.addObject("tel3", telArray[2]);
 
-        modelView.setViewName("/form");
+        modelView.setViewName("form");
         return modelView;
     }
 

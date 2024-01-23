@@ -17,8 +17,8 @@ public interface UserDAO {
     int idFailYnCheck(Map<String, Object> loginInfo);
     String failPasswordCheck(Map<String, Object> loginInfo);
     UserDTO selectUserInfo(PrincipalDetails authUser);
-    UserDTO selectUserInfo(UserDTO userDTO);
     int updateUser(Map<String, Object> param);
     void insertLog(Map<String, Object> param);
     List<UserDTO> selectUserList(Map<String, Object> param);
+    Map<String, Object> selectUserObject(String tel);
 }

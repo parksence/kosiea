@@ -16,7 +16,7 @@ public interface UserService {
     int idFailYnCheck(Map<String, Object> loginInfo);
     boolean failPasswordCheck(Map<String, Object> loginInfo);
     UserDTO selectUserInfo(PrincipalDetails authUser);
-    UserDTO selectUserInfo(UserDTO userDTO);
     int updateUser(Map<String, Object> param);
     List<UserDTO> selectUserList(Map<String, Object> param);
+    Map<String, Object> selectUserObject(String tel);
 }

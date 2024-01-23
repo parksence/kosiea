@@ -110,9 +110,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO selectUserInfo(UserDTO userDTO) {
-        UserDTO userDTOs = userDAO.selectUserInfo(userDTO);
-        return userDTOs;
+    public Map<String, Object> selectUserObject(String tel) {
+        Map<String, Object> hm = userDAO.selectUserObject(tel);
+        return hm;
     }
 
     @Override

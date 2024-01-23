@@ -56,20 +56,20 @@ public class HomeController {
         modelView.addObject("tel2", telArray[1]);
         modelView.addObject("tel3", telArray[2]);
 
-        modelView.setViewName("/form");
+        modelView.setViewName("form");
         return modelView;
     }
 
     @RequestMapping(value = "/login", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView login(ModelAndView modelView, Model model) throws Exception {
 
-        modelView.setViewName("/login");
+        modelView.setViewName("login");
         return modelView;
     }
 
     @RequestMapping(value = "/create", method = { RequestMethod.GET, RequestMethod.POST })
     public ModelAndView create(ModelAndView modelView, Model model, @AuthenticationPrincipal PrincipalDetails authUser) throws Exception {
-        modelView.setViewName("/create");
+        modelView.setViewName("create");
         return modelView;
     }
 
@@ -90,7 +90,7 @@ public class HomeController {
 
         modelView.addObject("userList", userDTOList);
 
-        modelView.setViewName("/search");
+        modelView.setViewName("search");
         return modelView;
     }
 
@@ -103,7 +103,7 @@ public class HomeController {
         }
 
         UserDTO userDTO = userService.selectUserInfo(authUser);
-        modelView.addObject(userDTO);
+        modelView.addObject("userDTO", userDTO);
 
         // 우편번호 주소 나누기
         String addr1 = userDTO.getADDR1();
@@ -129,7 +129,7 @@ public class HomeController {
         modelView.addObject("tel2", telArray[1]);
         modelView.addObject("tel3", telArray[2]);
 
-        modelView.setViewName("/form");
+        modelView.setViewName("form");
         return modelView;
     }
 

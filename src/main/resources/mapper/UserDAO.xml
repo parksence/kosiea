@@ -110,7 +110,7 @@
 		     <if test="lunar_birthday != null and lunar_birthday != ''">
 		     , LUNAR = #{lunar_birthday}
 		     </if>
-		     , LUNAR_YN = #{lunar_yn}
+		     , LUNAR_YN = IFNULL(#{lunar_yn}, '0')
 		     , ADDR1 = #{addr1}
 		     , ADDR2 = #{addr2}
 		     , TEL = #{tel}
@@ -138,7 +138,7 @@
 		  <if test="lunar_birthday != null and lunar_birthday != ''">
 		  , LUNAR = #{lunar_birthday}
 		  </if>
-		  , LUNAR_YN = #{lunar_yn}
+		  , LUNAR_YN = IFNULL(#{lunar_yn}, '0')
 		  , ADDR1 = #{addr1}
 		  , ADDR2 = #{addr2}
 		  , TEL = #{tel}

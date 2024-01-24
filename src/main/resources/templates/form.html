@@ -57,6 +57,21 @@
 </style>
 <script th:inline="javascript">
 
+    // var test = [[${userDTO}]];
+    // console.log(test, 'test')
+
+    // 로그아웃
+    async function logout(type){
+        if(!type) {
+            if(!confirm("로그아웃 하시겠습니까?")) return;
+        }
+        await fetch('/logout', {
+            method:'post',
+        })
+            .then(()=>{location.replace('/login')})
+            .catch(e=>console.log(e));
+    };
+
     // 데이터 입력 검증 로직
     const validateInput = (id, message) => {
         var element = document.getElementById(id);
@@ -167,7 +182,7 @@
         document.getElementById('password').value = '';
 
         // 성별 초기화
-        document.getElementById('male').checked = true;
+        document.getElementById('male').checked = false;
         document.getElementById('female').checked = false;
 
         // 업종, 소속, 직책 초기화
@@ -189,6 +204,10 @@
         // 자택 주소 초기화
         document.getElementById('addr2-1').value = '';
         document.getElementById('addr2-2').value = '';
+
+        // 명절 희망 배송지 초기화
+        document.getElementById('home').checked = false;
+        document.getElementById('co').checked = false;
 
         // 이미지 초기화
         $('[data-kt-image-input-action="cancel"]').click();
@@ -231,6 +250,11 @@
                         <span class="menu-link">
                               <span class="menu-title">회원정보</span>
                         </span>
+                        <div class="menu-item mt-5">
+                            <button onclick="logout();" class="btn btn-active-secondary" style="position: absolute; top: 15px; right: 20px;">
+                                <div>로그아웃</div>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="d-flex align-items-center d-lg-none ms-n3 me-1 me-md-2" title="Show sidebar menu">

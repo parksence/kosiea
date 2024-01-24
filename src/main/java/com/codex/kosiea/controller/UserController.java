@@ -286,18 +286,6 @@ public class UserController {
         // 연락처로 회원정보 조회
         Map<String, Object> hm = userService.selectUserObject(tel);
 
-        // null 값들도 hm에 포함하여 전달
-        if(hm.get("FILE_LOCATION") == null) {
-           hm.put("FILE_LOCATION", "");
-        }
-
-        if(hm.get("FILE_LOCATION2") == null) {
-            hm.put("FILE_LOCATION2", "");
-        }
-        if(hm.get("LUNAR") == null) {
-            hm.put("LUNAR", "");
-        }
-
         // 로그인 정보 전달
         modelView.addObject("userDTO", hm);
 

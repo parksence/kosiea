@@ -6,7 +6,6 @@
     <meta name="description" content="한국 스마트 혁신기업가 협회 회원관리 시스템" />
     <meta name="keywords" content="회원관리, 회원관리 시스템" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <meta property="og:title" content="KOSIEA 회원관리 시스템" />
     <meta property="og:url" content="" />
     <meta property="og:type" content="website" />
@@ -19,6 +18,18 @@
     <link href="../assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 </head>
 <script th:inline="javascript">
+
+    // 로그아웃
+    async function logout(type){
+        if(!type) {
+            if(!confirm("로그아웃 하시겠습니까?")) return;
+        }
+        await fetch('/logout', {
+            method:'post',
+        })
+            .then(()=>{location.replace('/login')})
+            .catch(e=>console.log(e));
+    };
 
     function getUserList() {
         const user_list = document.user_list;
@@ -107,6 +118,11 @@
                             <span class="menu-link">
                                 <span class="menu-title">회원조회</span>
                             </span>
+                            <div class="menu-item mt-5">
+                                <button onclick="logout();" class="btn btn-active-secondary" style="position: absolute; top: 15px; right: 20px;">
+                                    <div>로그아웃</div>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="d-flex align-items-center d-lg-none ms-n3 me-1 me-md-2" title="Show sidebar menu">

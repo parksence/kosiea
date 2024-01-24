@@ -66,7 +66,34 @@
 	</select>
 
 	<select id="selectUserObject" resultType="map" parameterType="String">
-		SELECT *
+		SELECT NO
+			 , NAME
+			 , PASSWORD
+			 , GENDER
+			 , KOB
+			 , COMPANY
+			 , POSITION
+			 , BIRTHDAY
+			 , ADDR1
+			 , ADDR2
+			 , IFNULL(LUNAR, '') AS LUNAR
+			 , IFNULL(LUNAR_YN, '') AS LUNAR_YN
+			 , TEL
+			 , TYPE1
+			 , TYPE2
+			 , TYPE3
+			 , PAYDATE
+			 , DUES
+			 , ETC1
+			 , ETC2
+			 , IDNUMBER
+			 , STATUS
+			 , MBAMT
+			 , IFNULL(FILE_LOCATION, '') AS FILE_LOCATION
+			 , IFNULL(FILE_LOCATION2, '') AS FILE_LOCATION2
+			 , IFNULL(GIFT_YN, '') AS GIFT_YN
+			 , ROLE_CD
+			 , ROLE_NM
 		  FROM MEMBERS
 		 WHERE TEL = #{TEL}
 	</select>

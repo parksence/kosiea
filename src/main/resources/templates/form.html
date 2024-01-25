@@ -85,10 +85,6 @@
     }
 
     const userUpdate = () => {
-        // 비밀번호 입력 체크
-        if(!validateInput('password', '비밀번호를 입력해주세요.')) {
-            return false;
-        }
 
         // 이름 입력 체크
         if(!validateInput('name', '이름을 입력해주세요.')) {
@@ -458,11 +454,12 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-6">
-                                                <label class="col-lg-3 col-form-label required fw-semibold fs-6">비밀번호</label>
+                                                <label class="col-lg-3 col-form-label fw-semibold fs-6">비밀번호</label>
                                                 <div class="col-lg-7 fv-row">
                                                     <input type="password" name="password" id="password"
                                                            class="form-control form-control-lg form-control-solid"
                                                            placeholder="비밀번호 입력"/>
+                                                    <div class="form-text">비밀번호 변경시에만 입력 해주세요.</div>
                                                 </div>
                                             </div>
                                             <div class="row mb-6">

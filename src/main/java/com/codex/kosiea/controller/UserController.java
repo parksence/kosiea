@@ -166,9 +166,6 @@ public class UserController {
         // 이미지가 업로드 되었는지 확인
         if(file != null && !file.isEmpty()) {
 
-            System.out.println("path = " + bPath);
-            System.out.println("profilePath = " + profilePath);
-
             // 파일 저장 경로
             String uploadDir = bPath;
             // 아래 코드는 로컬에서 테스트할 때 사용
@@ -250,8 +247,6 @@ public class UserController {
 
         // 로그인한 사용자 정보 전달
         String loginUserName = (String) param.get("name");
-
-        System.out.println("param = " + param.toString());
 
         // 전화번호 포맷팅
         String loginUserTel = (String) param.get("origin_tel[0]");

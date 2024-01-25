@@ -100,9 +100,11 @@
 	<!-- 계정 등록 -->
 	<insert id="updateUser" parameterType="map">
 		UPDATE MEMBERS
-		   SET PASSWORD = #{password}
-		     , KOB = #{kob}
+		   SET KOB = #{kob}
 		     , GENDER = #{gender}
+			 <if test="password != null and password != ''">
+		     , PASSWORD = #{password}
+			 </if>
 		     , COMPANY = #{company}
 		     , POSITION = #{position}
 		     , BIRTHDAY = #{birthday}
@@ -127,8 +129,8 @@
 
 	<insert id="insertLog" parameterType="map">
 		INSERT INTO MEMBER_LOG
-		SET PASSWORD = #{password}
-		  , NAME = #{name}
+		SET NAME = #{name}
+		  , PASSWORD = #{password}
 		  , KOB = #{kob}
 		  , GENDER = #{gender}
 		  , COMPANY = #{company}
@@ -159,6 +161,7 @@
 				)
 			</if>
 		</where>
+		 ORDER BY NAME
 	</select>
 
 </mapper>

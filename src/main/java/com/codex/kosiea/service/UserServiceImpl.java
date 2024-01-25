@@ -118,9 +118,11 @@ public class UserServiceImpl implements UserService {
     public int updateUser(Map<String, Object> param) {
         System.out.println("param.toString() = " + param.toString());
 
-        // 비밀번호 암호화
-        String pw = (String) param.get("password");
-        param.put("password", passwordEncoder.encode(pw));
+        if (!param.get("password").equals("")) {
+            // 비밀번호 암호화
+            String pw = (String) param.get("password");
+            param.put("password", passwordEncoder.encode(pw));
+        }
 
         // 전화번호 포맷팅
         String tel_sum = (String) param.get("tel[0]");

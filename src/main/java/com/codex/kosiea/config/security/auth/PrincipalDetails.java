@@ -69,7 +69,7 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userDTO.getNAME();
+        return userDTO.getTEL();
     }
 
     public String getRoleCd() {

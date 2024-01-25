@@ -15,7 +15,7 @@
 	<select id="findByUserID" resultType="User" parameterType="string">
 		SELECT *
 		  FROM MEMBERS
-		 WHERE NAME = #{username}
+		 WHERE REPLACE(TEL, '-', '') = REPLACE(#{username}, '-', '')
 	</select>
 
 	<!-- 계정 등록 -->
@@ -47,8 +47,7 @@
 	<select id="idFailYnCheck" resultType="int" parameterType="map">
 		SELECT COUNT(*) AS cnt
 		  FROM MEMBERS
-		 WHERE NAME = #{name}
-		   AND REPLACE(TEL, '-', '') = #{tel}
+		 WHERE REPLACE(TEL, '-', '') = REPLACE(#{tel}, '-', '')
 	</select>
 
 	<select id="failPasswordCheck" resultType="String" parameterType="map">

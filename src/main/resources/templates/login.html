@@ -37,10 +37,6 @@
             return false;
         }
 
-        if(!validateInput('tel', '전화번호를 입력해주세요.')) {
-            return false;
-        }
-
         if(!validateInput('password', '비밀번호를 입력해주세요.')) {
             return false;
         }
@@ -97,11 +93,7 @@
                                     <h1 class="text-gray-900 fw-bolder mb-3">회원 수첩 제작용 정보 수집 시스템</h1>
                                 </div>
                                 <div class="fv-row mb-8">
-                                    <input type="text" placeholder="이름" name="username" id="username" autocomplete="off"
-                                           class="form-control bg-transparent" value=""/>
-                                </div>
-                                <div class="fv-row mb-8">
-                                    <input type="tel" placeholder="전화번호" name="tel" id="tel" autocomplete="off"
+                                    <input type="text" placeholder="전화번호" name="username" id="username" autocomplete="off"
                                            class="form-control bg-transparent" value=""/>
                                 </div>
                                 <div class="fv-row mb-3">

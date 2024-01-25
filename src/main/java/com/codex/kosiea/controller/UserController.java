@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -63,7 +64,6 @@ public class UserController {
             String uploadDir = bPath;
             // 아래 코드는 로컬에서 테스트할 때 사용
             // String uploadDir = ResourceUtils.getFile("classpath:static/profile/").getAbsolutePath() + "/";
-
 
             // 파일 저장 경로 설정
             File folder = new File(uploadDir);
@@ -148,7 +148,10 @@ public class UserController {
         int result = userService.insertUser(param);
         System.out.println("result = " + result);
         if(result > 0) {
-            response.sendRedirect("/");
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('회원 정보 등록이 완료되었습니다.'); location.replace('/');</script>");
+            out.flush();
         }
     }
 
@@ -269,7 +272,10 @@ public class UserController {
         int result = userService.updateUser(param);
         System.out.println("result = " + result);
         if(result > 0) {
-            response.sendRedirect("/form/"+loginUserTel);
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('회원 정보 수정이 완료되었습니다.'); location.replace('/form/" + loginUserTel + "');</script>");
+            out.flush();
         }
     }
 

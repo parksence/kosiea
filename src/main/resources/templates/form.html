@@ -367,7 +367,7 @@
                         <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
                             <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                                 <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-                                    회원 정보 등록
+                                    회원 정보 수정
                                 </h1>
                             </div>
                         </div>
@@ -383,11 +383,11 @@
                                                 <div class="col-lg-7">
                                                     <div class="image-input image-input-outline" th:classappend="${userDTO.FILE_LOCATION == null || userDTO.FILE_LOCATION == '' ? 'image-input-empty' : ''}"
                                                          data-kt-image-input="true"
-                                                         style="background-image: url('../assets/media/svg/avatars/blank.svg')">
+                                                         style="background-image: url('../assets/media/svg/avatars/blank.svg'); background-size: contain">
                                                         <div class="image-input-wrapper w-125px h-125px"
                                                              id="FILE_LOCATION1"
                                                              th:style="${userDTO.FILE_LOCATION != null} ?
-                                                             'background-image: url(' + ${userDTO.FILE_LOCATION} + ');' :
+                                                             'background-image: url(' + ${userDTO.FILE_LOCATION} + '); background-size: contain;' :
                                                              'background-image: '+ ${userDTO.FILE_LOCATION} +';'
                                                             ">
                                                         </div>
@@ -409,16 +409,17 @@
                                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
                                                               data-kt-image-input-action="remove"
                                                               data-bs-toggle="tooltip" title="프로필 사진 제거">
-                                                      <i class="ki-duotone ki-cross fs-2">
-                                                         <span class="path1"></span>
-                                                         <span class="path2"></span>
-                                                      </i>
-                                                   </span>
+                                                              <i class="ki-duotone ki-cross fs-2">
+                                                                 <span class="path1"></span>
+                                                                 <span class="path2"></span>
+                                                              </i>
+                                                        </span>
                                                     </div>
+                                                    <div class="form-text">수첩에 인쇄될 사진이므로 높은 해상도 사진을 올려주세요.</div>
                                                 </div>
                                             </div>
                                             <div class="row mb-6">
-                                                <label class="col-lg-3 col-form-label fw-semibold fs-6">명함 사진</label>
+                                                <label class="col-lg-3 col-form-label fw-semibold fs-6">명함 이미지</label>
                                                 <div class="col-lg-7">
                                                     <div class="image-input image-input-outline" th:classappend="${userDTO.FILE_LOCATION2 == null || userDTO.FILE_LOCATION2 == '' ? 'image-input-empty' : ''}"
                                                          data-kt-image-input="true"
@@ -454,7 +455,6 @@
                                                                     </i>
                                                         </span>
                                                     </div>
-                                                    <div class="form-text">수첩에 인쇄될 사진이므로 높은 해상도 사진을 올려주세요.</div>
                                                 </div>
                                             </div>
                                             <div class="row mb-6">

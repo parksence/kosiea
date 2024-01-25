@@ -25,27 +25,20 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-//		 System.out.println("principal : " + principal);
-
 		if (principal.toString() != "anonymousUser") {
 			UserDetails userDetails = (UserDetails) principal;
 
-			ArrayList<UserDTO> user = userDAO.findByUserID(userDetails.getUsername().toString());
+			ArrayList<UserDTO> user = userDAO.findByUserID(userDetails.getUsername());
 			System.out.println("[ BeforeActionInterceptor ]");
 
 			for (GrantedAuthority user_auth : userDetails.getAuthorities()) {
-//				System.out.println("user_auth.toString() = " + user_auth.toString());
 				if (user_auth.toString().equals("사용자")) {
-					//System.out.println("user_auth : " + user_auth);
 					request.setAttribute("admin", true);
 				}
 			}
 
 			request.setAttribute("isLogined", true);
 			request.setAttribute("username", user.get(0).getNAME());
-//			request.setAttribute("agency", user.get(0).getAGENCY());
-//			request.setAttribute("rolename", user.get(0).getROLE_NAME());
-//			request.setAttribute("rolecode", user.get(0).getROLE_CODE());
 		} else {
 			request.setAttribute("isLogined", false);
 			request.setAttribute("admin", false);

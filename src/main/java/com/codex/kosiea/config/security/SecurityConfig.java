@@ -67,6 +67,11 @@ public class SecurityConfig {
             .alwaysRemember(true)
             .userDetailsService(userDetailsService);
 
+        http
+                .headers(headers -> headers
+                        .cacheControl(cache -> cache.disable())
+                );
+
         return http.build();
     }
 

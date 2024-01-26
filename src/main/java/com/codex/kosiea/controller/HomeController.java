@@ -90,6 +90,10 @@ public class HomeController {
 
         modelView.addObject("userList", userDTOList);
 
+        // 로그인 유저의 권한 코드
+        String userCd = authUser.getRoleCd();
+        modelView.addObject("loginUserRoleCd", userCd);
+
         modelView.setViewName("/search");
         return modelView;
     }

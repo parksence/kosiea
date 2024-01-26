@@ -284,6 +284,11 @@ public class UserController {
             return modelView;
         }
 
+        if (!authUser.getRoleCd().equals("999")) {
+            modelView.setViewName("redirect:/");
+            return modelView;
+        }
+
         // 연락처로 회원정보 조회
         Map<String, Object> hm = userService.selectUserObject(tel);
 

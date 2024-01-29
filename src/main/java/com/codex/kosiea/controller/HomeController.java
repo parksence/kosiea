@@ -56,6 +56,9 @@ public class HomeController {
         modelView.addObject("tel2", telArray[1]);
         modelView.addObject("tel3", telArray[2]);
 
+        // 관리자 수정 여부
+        modelView.addObject("writeYn", true);
+
         modelView.setViewName("form");
         return modelView;
     }

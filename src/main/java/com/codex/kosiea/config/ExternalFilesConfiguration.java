@@ -20,9 +20,9 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @Configuration
 public class ExternalFilesConfiguration implements WebMvcConfigurer {
 
-	@Autowired
-	@Qualifier("beforeActionInterceptor")
-	HandlerInterceptor beforeActionInterceptor;
+//	@Autowired
+//	@Qualifier("beforeActionInterceptor")
+//	HandlerInterceptor beforeActionInterceptor;
 
 	private final String PATH = "file://";
 
@@ -106,12 +106,12 @@ public class ExternalFilesConfiguration implements WebMvcConfigurer {
 				.addResourceLocations(PATH + externalFiles.getExternalProfile());
 	}
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		// 단 resource 로 시작하는 액션은 제외
-		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**")
-				.excludePathPatterns("/js/**").excludePathPatterns("/static/**").excludePathPatterns("/assets/**")
-				.excludePathPatterns("/static/bc/**").excludePathPatterns("/static/profile/**");
-	}
+//	@Override
+//	public void addInterceptors(InterceptorRegistry registry) {
+//		// 단 resource 로 시작하는 액션은 제외
+//		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**")
+//				.excludePathPatterns("/js/**").excludePathPatterns("/static/**").excludePathPatterns("/assets/**")
+//				.excludePathPatterns("/static/bc/**").excludePathPatterns("/static/profile/**");
+//	}
 
 }

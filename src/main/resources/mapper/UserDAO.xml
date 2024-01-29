@@ -53,8 +53,7 @@
 	<select id="failPasswordCheck" resultType="String" parameterType="map">
 		SELECT PASSWORD
 		  FROM MEMBERS
-		 WHERE NAME = #{name}
-		   AND REPLACE(TEL, '-', '') = #{tel}
+		 WHERE REPLACE(TEL, '-', '') = REPLACE(#{tel}, '-', '')
 	</select>
 
 	<select id="selectUserInfo" resultType="User" parameterType="map">

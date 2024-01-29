@@ -29,7 +29,7 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 
 		// 로그인할 때 아이디, 비밀번호 값 담기
 		Map<String, Object> loginInfo = new HashMap();
-		loginInfo.put("name", username);
+		loginInfo.put("tel", username);
 		loginInfo.put("password", password);
 
 		// 아이디 존재 여부 체크하여 있으면 : 1 없으면 : 0
@@ -43,6 +43,7 @@ public class CustomAuthFailureHandler extends SimpleUrlAuthenticationFailureHand
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('비밀번호가 틀렸습니다.'); location.replace('/');</script>");
 				out.flush();
+				return;
 			}
 		} else {
 			// 신규가입 페이지로 이동

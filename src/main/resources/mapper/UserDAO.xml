@@ -71,7 +71,7 @@
 			 , KOB
 			 , COMPANY
 			 , POSITION
-			 , BIRTHDAY
+			 , IFNULL(BIRTHDAY, '') AS BIRTHDAY
 			 , ADDR1
 			 , ADDR2
 			 , IFNULL(LUNAR, '') AS LUNAR

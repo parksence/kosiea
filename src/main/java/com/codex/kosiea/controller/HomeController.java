@@ -90,10 +90,6 @@ public class HomeController {
 
         modelView.addObject("userList", userDTOList);
 
-        // 로그인 유저의 권한 코드
-        String userCd = authUser.getRoleCd();
-        modelView.addObject("loginUserRoleCd", userCd);
-
         modelView.setViewName("/search");
         return modelView;
     }
@@ -132,6 +128,9 @@ public class HomeController {
         modelView.addObject("tel1", telArray[0]);
         modelView.addObject("tel2", telArray[1]);
         modelView.addObject("tel3", telArray[2]);
+
+        // 관리자 수정 여부
+        modelView.addObject("writeYn", true);
 
         modelView.setViewName("/form");
         return modelView;

@@ -284,11 +284,6 @@ public class UserController {
             return modelView;
         }
 
-        if (!authUser.getRoleCd().equals("999")) {
-            modelView.setViewName("redirect:/");
-            return modelView;
-        }
-
         // 연락처로 회원정보 조회
         Map<String, Object> hm = userService.selectUserObject(tel);
 
@@ -318,6 +313,20 @@ public class UserController {
         modelView.addObject("tel1", telArray[0]);
         modelView.addObject("tel2", telArray[1]);
         modelView.addObject("tel3", telArray[2]);
+
+        // 관리자 수정 여부
+        boolean writeYn = false;
+        if(authUser.getRoleCd().equals("999")) { // 관리자 일때
+            writeYn = true;
+        } else { // 사용자 일때
+            if(tel.equals(authUser.getTEL())) {
+                writeYn = true;
+            } else {
+                writeYn = false;
+            }
+        }
+
+        modelView.addObject("writeYn", writeYn);
 
         modelView.setViewName("/form");
         return modelView;

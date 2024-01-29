@@ -392,7 +392,7 @@
                                                                data-kt-image-input-action="change"
                                                                data-bs-toggle="tooltip" title="프로필 사진 변경">
                                                             <input type="file" name="avatar"
-                                                                   accept=".png, .jpg, .jpeg"/>
+                                                                   accept=".png, .jpg, .jpeg" th:disabled="${not writeYn}"/>
                                                             <input type="hidden" name="avatar_remove"/>
                                                         </label>
                                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
@@ -432,7 +432,7 @@
                                                                data-kt-image-input-action="change"
                                                                data-bs-toggle="tooltip" title="명함 사진 변경">
                                                             <input type="file" name="avatar2"
-                                                                   accept=".png, .jpg, .jpeg"/>
+                                                                   accept=".png, .jpg, .jpeg" th:disabled="${not writeYn}"/>
                                                             <input type="hidden" name="avatar_remove2"/>
                                                         </label>
                                                         <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow"
@@ -459,7 +459,7 @@
                                                 <div class="col-lg-7 fv-row">
                                                     <input type="password" name="password" id="password"
                                                            class="form-control form-control-lg form-control-solid"
-                                                           placeholder="비밀번호 입력"/>
+                                                           placeholder="비밀번호 입력" th:readonly="${not writeYn}"/>
                                                     <div class="form-text">비밀번호 변경시에만 입력 해주세요.</div>
                                                 </div>
                                             </div>
@@ -477,12 +477,12 @@
                                                     <div class="d-flex align-items-center mt-3">
                                                         <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                                             <input class="form-check-input" id="male" name="gender" type="radio"
-                                                                   value="남성" th:checked="${userDTO.GENDER == '남성'}"/>
+                                                                   value="남성" th:checked="${userDTO.GENDER == '남성'}" th:disabled="${not writeYn}"/>
                                                             <span class="fw-semibold ps-2 fs-6">남성</span>
                                                         </label>
                                                         <label class="form-check form-check-custom form-check-inline form-check-solid">
                                                             <input class="form-check-input" id="female" name="gender" type="radio"
-                                                                   value="여성" th:checked="${userDTO.GENDER == '여성'}"/>
+                                                                   value="여성" th:checked="${userDTO.GENDER == '여성'}" th:disabled="${not writeYn}"/>
                                                             <span class="fw-semibold ps-2 fs-6">여성</span>
                                                         </label>
                                                     </div>
@@ -493,7 +493,7 @@
                                                 <div class="col-lg-7 fv-row">
                                                     <input type="text" name="kob" id="kob"
                                                            class="form-control form-control-lg form-control-solid"
-                                                           placeholder="업종" th:value="${userDTO.KOB}"/>
+                                                           placeholder="업종" th:value="${userDTO.KOB}" th:readonly="${not writeYn}"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-6">
@@ -501,7 +501,7 @@
                                                 <div class="col-lg-7 fv-row">
                                                     <input type="text" name="company" id="company"
                                                            class="form-control form-control-lg form-control-solid"
-                                                           placeholder="소속" th:value="${userDTO.COMPANY}"/>
+                                                           placeholder="소속" th:value="${userDTO.COMPANY}" th:readonly="${not writeYn}"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-6">
@@ -509,7 +509,7 @@
                                                 <div class="col-lg-7 fv-row">
                                                     <input type="text" name="position" id="position"
                                                            class="form-control form-control-lg form-control-solid"
-                                                           placeholder="직책" th:value="${userDTO.POSITION}"/>
+                                                           placeholder="직책" th:value="${userDTO.POSITION}" th:readonly="${not writeYn}"/>
                                                 </div>
                                             </div>
                                             <div class="row mb-6">
@@ -519,12 +519,12 @@
                                                         <div class="col-lg-5">
                                                             <input type="date" name="birthday" id="birthday"
                                                                    class="form-control form-control-lg form-control-solid"
-                                                                   placeholder="생년월일" th:value="${userDTO.BIRTHDAY}"/>
+                                                                   placeholder="생년월일" th:value="${userDTO.BIRTHDAY}" th:readonly="${not writeYn}"/>
                                                         </div>
                                                         <div class="col-lg-5" style="display:flex; align-items:center;">
                                                             <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                                                 <input class="form-check-input" name="lunar_yn" id="lunar_yn"
-                                                                       type="checkbox" value="1" th:checked="${userDTO.LUNAR_YN == 1}"/>
+                                                                       type="checkbox" value="1" th:checked="${userDTO.LUNAR_YN == 1}" th:disabled="${not writeYn}"/>
                                                                 <span class="fw-semibold ps-2 fs-6">음력</span>
                                                             </label>
                                                         </div>
@@ -538,7 +538,7 @@
                                                         <input type="date" name="lunar_birthday" id="lunar"
                                                                class="form-control form-control-lg form-control-solid"
                                                                placeholder="음력 생년월일"
-                                                               th:value="${userDTO.LUNAR}"/>
+                                                               th:value="${userDTO.LUNAR}" th:readonly="${not writeYn}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -565,7 +565,7 @@
                                                         <div class="col-lg-12">
                                                             <input type="text" name="addr1-2" id="addr1-2"
                                                                    class="form-control form-control-lg form-control-solid"
-                                                                   th:value="${address}" size="50">
+                                                                   th:value="${address}" size="50" th:readonly="${not writeYn}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -592,7 +592,7 @@
                                                         <div class="col-lg-12">
                                                             <input type="text" name="addr2-2" id="addr2-2"
                                                                    class="form-control form-control-lg form-control-solid"
-                                                                   th:value="${address2}" size="50">
+                                                                   th:value="${address2}" size="50" th:readonly="${not writeYn}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -603,12 +603,12 @@
                                                     <div class="d-flex align-items-center mt-3">
                                                         <label class="form-check form-check-custom form-check-inline form-check-solid me-5">
                                                             <input class="form-check-input" id="home" name="gift_yn" type="radio"
-                                                                   value="자택" th:checked="${userDTO.GIFT_YN == '자택'}"/>
+                                                                   value="자택" th:checked="${userDTO.GIFT_YN == '자택'}" th:disabled="${not writeYn}"/>
                                                             <span class="fw-semibold ps-2 fs-6">자택</span>
                                                         </label>
                                                         <label class="form-check form-check-custom form-check-inline form-check-solid">
                                                             <input class="form-check-input" id="co" name="gift_yn" type="radio"
-                                                                   value="직장" th:checked="${userDTO.GIFT_YN == '직장'}"/>
+                                                                   value="직장" th:checked="${userDTO.GIFT_YN == '직장'}" th:disabled="${not writeYn}"/>
                                                             <span class="fw-semibold ps-2 fs-6">직장</span>
                                                         </label>
                                                     </div>
@@ -646,8 +646,8 @@
                                             </div>
                                         </div>
                                         <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                            <button class="btn btn-light btn-active-light-primary me-2" type="button" onclick="userReset()">초기화</button>
-                                            <button type="button" class="btn btn-primary" id="kt_account_profile_details_submit" onclick="userUpdate();">저장</button>
+                                            <button class="btn btn-light btn-active-light-primary me-2" type="button" onclick="userReset()" th:disabled="${not writeYn}">초기화</button>
+                                            <button type="button" class="btn btn-primary" id="kt_account_profile_details_submit" onclick="userUpdate();" th:disabled="${not writeYn}">저장</button>
                                         </div>
                                     </form>
                                 </div>
@@ -690,6 +690,11 @@
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function execDaumPostcode1() {
+        var writeYn = [[${writeYn}]];
+        if (!writeYn) {
+            return;
+        }
+
         new daum.Postcode({
             oncomplete: function (data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -721,6 +726,11 @@
     }
 
     function execDaumPostcode2() {
+        var writeYn = [[${writeYn}]];
+        if (!writeYn) { // 읽기 전용
+            return;
+        }
+
         new daum.Postcode({
             oncomplete: function (data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
